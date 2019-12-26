@@ -31,10 +31,10 @@ RUN pip install angr
 RUN pip3 install frida frida-tools
 
 # install libcdb
-WORKDIR "/opt"
-RUN git clone https://github.com/niklasb/libc-database.git
-WORKDIR "libc-database"
-RUN bash ./get ; exit 0
+#WORKDIR "/opt"
+#RUN git clone https://github.com/niklasb/libc-database.git
+#WORKDIR "libc-database"
+#RUN bash ./get ; exit 0
 
 # set locale to English/UTF-8
 RUN locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
@@ -51,7 +51,10 @@ RUN ln -s \
 RUN git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
 RUN sh ~/.vim_runtime/install_awesome_vimrc.sh
 
+# Configure tmux to work with mouse
+RUN echo "set -g mouse on" >> /etc/tmux.conf
+
 RUN apt-get clean
 
 # go back to ~
- WORKDIR "/root"
+ WORKDIR "/chall"
